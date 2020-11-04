@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
-import Aux from '../../hoc/Auxilary/Auxilary';
-import Burger from '../../components/Burger/Burger';
-import BuildControls from '../../components/Burger/BuildControls/BuildControls';
-import Modal from '../../components/UI/Modal/Modal';
-import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
-import Spinner from "../../components/UI/Spinner/Spnner";
+import Aux from '../../../hoc/Auxilary/Auxilary';
+import Burger from '../../../components/Burger/Burger';
+import BuildControls from '../../../components/Burger/BuildControls/BuildControls';
+import Modal from '../../../components/UI/Modal/Modal';
+import OrderSummary from '../../../components/Burger/OrderSummary/OrderSummary';
+import Spinner from "../../../components/UI/Spinner/Spnner";
 
-import {withErrorHandler} from '../../hoc/withErrorHandler/withErrorHandler';
-import axios from "../../axios-order";
+import {withErrorHandler} from '../../../hoc/withErrorHandler/withErrorHandler';
+import axios from "../../../axios-order";
 
 const INGREDIENT_PRICES = {
     salad: 0.5,
@@ -34,7 +34,6 @@ class BurgerBuilder extends Component {
     componentDidMount(){
         axios.get('/ingredients.json').then(res=>{
             if(res.data){
-                console.log(res.data);
                 this.setState({ingredients:res.data})
             }
         })
@@ -46,7 +45,7 @@ class BurgerBuilder extends Component {
     }
 
     updatePurchaseState (ingredients) {
-        const sum = Object.keys( ingredients )
+        const sum = (Object.keys( ingredients ))
             .map( igKey => {
                 return ingredients[igKey];
             } )
@@ -101,17 +100,23 @@ class BurgerBuilder extends Component {
         const orderDetails = {
             ingredientAdded:this.state.ingredients,
             totalPrice:parseFloat((this.state.totalPrice).toFixed(2)),
-            CustomerName:'saurabh',
-            country:'india',
-            PostalCode:801503
-        }
-        axios.post('/orders.json',orderDetails).then(res=>{
-            if((res.status ===204 || res.status === 200)){
-                this.setState({purchasing:false,loading:false})
+            customerDetail:{
+                CustomerName:'saurabh',
+                country:'india',
+                PostalCode:801503
             }
-        }).catch(err=>{
-            this.setState({purchasing:false,loading:false})
+        }
+       setTimeout(()=>{
+        this.setState({purchasing:false,loading:false},()=>{
+            this.props.history.push({
+                pathname:'/checkout',
+                state:{
+                    orderDetails: orderDetails
+                }
+            })
         })
+       },2000)
+        
     }
 
     render () {
