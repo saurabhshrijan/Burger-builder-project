@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 
-import Aux from '../../../hoc/Auxilary/Auxilary';
-import Burger from '../../../components/Burger/Burger';
-import BuildControls from '../../../components/Burger/BuildControls/BuildControls';
-import Modal from '../../../components/UI/Modal/Modal';
-import OrderSummary from '../../../components/Burger/OrderSummary/OrderSummary';
-import Spinner from "../../../components/UI/Spinner/Spnner";
+import Aux from '../../hoc/Auxilary/Auxilary';
+import Burger from '../../components/Burger/Burger';
+import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+import Modal from '../../components/UI/Modal/Modal';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
+import Spinner from "../../components/UI/Spinner/Spnner";
 
-import {withErrorHandler} from '../../../hoc/withErrorHandler/withErrorHandler';
-import axios from "../../../axios-order";
+import {withErrorHandler} from '../../hoc/withErrorHandler/withErrorHandler';
+import axios from "../../axios-order";
 
 const INGREDIENT_PRICES = {
     salad: 0.5,
@@ -97,21 +97,16 @@ class BurgerBuilder extends Component {
     purchaseContinueHandler = () => {
         // alert('You continue!');
         this.setState({loading:true})
-        const orderDetails = {
+        const BurgerDetails = {
             ingredientAdded:this.state.ingredients,
             totalPrice:parseFloat((this.state.totalPrice).toFixed(2)),
-            customerDetail:{
-                CustomerName:'saurabh',
-                country:'india',
-                PostalCode:801503
-            }
         }
        setTimeout(()=>{
         this.setState({purchasing:false,loading:false},()=>{
             this.props.history.push({
                 pathname:'/checkout',
                 state:{
-                    orderDetails: orderDetails
+                    BurgerDetails: BurgerDetails
                 }
             })
         })

@@ -5,7 +5,7 @@ export class CheckoutPage extends Component {
         super(props);
         
         this.state={
-            orderDetails:null
+            BurgerDetails:null
         }
     }
     
@@ -19,17 +19,17 @@ export class CheckoutPage extends Component {
             })
         }
     }
+    
     render() {
-        console.log(this.state);
         return (
             <div>
                 {
-                this.state.orderDetails && this.state.orderDetails.ingredientAdded ?
+                this.state.BurgerDetails ?
                 <CheckoutSummary 
-                ingredients={this.state.orderDetails.ingredientAdded} 
-                orderDetails={this.state.orderDetails} {...this.props}/> : null
+                ingredients={this.state.BurgerDetails.ingredientAdded} 
+                {...this.props}/> : null
                 }
-                   
+               
             </div>
         )
     }

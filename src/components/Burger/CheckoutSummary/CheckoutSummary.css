@@ -1,0 +1,15 @@
+.CheckoutSummary{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 70%;
+    box-sizing: border-box;
+    border-bottom: 1px solid black;
+    padding: 40px;
+}
+.burger{
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}

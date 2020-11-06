@@ -1,0 +1,10 @@
+.wrapper{
+    width: 50%;
+    margin: auto;
+    box-sizing: border-box;
+    box-shadow: #723636;
+    border: 2px solid black;
+    padding: 50px;
+    margin-bottom: 40px;
+    z-index: -1;
+}
